@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CloudSync.Models.Genre>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left col-3 for Favorites -->
+        <div class="col-3 favourites-column general-column">
+            <h2 class="column-headings">My Favourites</h2>
+            <div class="row favourites-inner-column">Row 1</div>
+            <div class="row favourites-inner-column">Row 2</div>
+            <div class="row favourites-inner-column">Row 3</div>
+            <div class="row favourites-inner-column">Row 4</div>
+            <div class="row favourites-inner-column">Row 5</div>
+            <div class="row favourites-inner-column">Row 6</div>
+        </div>
+
+        <!-- Middle col-6 for Genres -->
+        <div class="col-6 browse-column general-column">
+            <h2 class="column-headings">Browse Genres</h2>
+            <div class="row">
+                @foreach (var genre in Model)
+                {
+                    <div class="col-4 genres">
+                        <a class="btn btn-primary btn-block" href="@Url.Action("ArtistsByGenre", "Genres", new { genreId = genre.GenreId })">
+                            @genre.GenreName
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Right col-3 for Artist Information -->
+        <div class="col-3 info-column general-column">
+            <h2 class="column-headings">Artist Information</h2>
+            <div class="row info-inner-column">Single Row</div>
+        </div>
+    </div>
+</div>

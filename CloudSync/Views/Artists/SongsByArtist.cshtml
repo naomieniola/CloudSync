@@ -1,0 +1,39 @@
+﻿@model CloudSync.Models.ArtistsSongs
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left col-3 for Favorites -->
+        <div class="col-3 favourites-column general-column">
+            <h2 class="column-headings">My Favourites</h2>
+            <div class="row favourites-inner-column">Row 1</div>
+            <div class="row favourites-inner-column">Row 2</div>
+            <div class="row favourites-inner-column">Row 3</div>
+            <div class="row favourites-inner-column">Row 4</div>
+            <div class="row favourites-inner-column">Row 5</div>
+            <div class="row favourites-inner-column">Row 6</div>
+        </div>
+
+        <!-- Middle col-6 for Songs by Selected Artist -->
+        <div class="col-6 browse-column general-column">
+            <h2 class="column-headings">Songs by @Model.ArtistName</h2>
+            <ul class="list-group">
+                @foreach (var song in Model.Songs)
+                {
+                    <li class="list-group-item">
+                        @song.SongName - @song.SongDuration
+                        <audio controls>
+                            <source src="@Url.Content(song.SongFile)" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <!-- Right col-3 for Artist Information -->
+        <div class="col-3 info-column general-column">
+            <h2 class="column-headings">Artist Information</h2>
+            <div class="row info-inner-column">Single Row</div>
+        </div>
+    </div>
+</div>

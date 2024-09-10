@@ -1,0 +1,72 @@
+﻿@* @model IEnumerable<CloudSync.Models.Song>
+ *@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left col-3 with 1 column and 6 rows -->
+        <div class="col-3 favourites-column general-column">
+            <h2 class="column-headings">My Favourites</h2>
+            <div class="row favourites-inner-column">Row 1</div>
+            <div class="row favourites-inner-column">Row 2</div>
+            <div class="row favourites-inner-column">Row 3</div>
+            <div class="row favourites-inner-column">Row 4</div>
+            <div class="row favourites-inner-column">Row 5</div>
+            <div class="row favourites-inner-column">Row 6</div>
+        </div>
+
+        <!-- Middle col-6 with 3 columns and 2 rows -->
+        <div class="col-6 browse-column general-column">
+            <h2 class="column-headings">Browse Genres</h2>
+
+            <div class="row">
+                <div class="col-4 genres">Rock</div>
+                <div class="col-4 genres">Pop</div>
+            </div>
+            <div class="row">
+                <div class="col-4 genres">Gospel</div>
+                <div class="col-4 genres">Instrumental</div>
+            </div>
+            <div class="row">
+                <div class="col-4 genres">RnB</div>
+                <div class="col-4 genres">Rap</div>
+            </div>
+        </div>
+
+
+        <!-- Right col-3 with 1 row -->
+        <div class="col-3 info-column general-column">
+            <h2 class="column-headings">Artist Information</h2>
+
+            <div class="row info-inner-column">Single Row</div>
+        </div>
+    </div>
+</div>
+
+
+
+<h2>Songs List</h2>
+
+@* <table class="table">
+    <thead>
+        <tr>
+            <th>Song Name</th>
+            <th>Artist</th>
+            <th>Play</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var song in Model)
+        {
+            <tr>
+                <td>@song.SongName</td>
+                <td>@song.Artist.ArtistName</td>
+                <td>
+                    <audio controls>
+                        <source src="@Url.Content(song.SongFile)" type="audio/mpeg">
+                        Your browser does not support the audio tag.
+                    </audio>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+ *@

@@ -1,0 +1,37 @@
+﻿@model CloudSync.Models.GenreArtists
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Left col-3 for Favorites -->
+        <div class="col-3 favourites-column general-column">
+            <h2 class="column-headings">My Favourites</h2>
+            <div class="row favourites-inner-column">Row 1</div>
+            <div class="row favourites-inner-column">Row 2</div>
+            <div class="row favourites-inner-column">Row 3</div>
+            <div class="row favourites-inner-column">Row 4</div>
+            <div class="row favourites-inner-column">Row 5</div>
+            <div class="row favourites-inner-column">Row 6</div>
+        </div>
+
+        <!-- Middle col-6 for Artists in Selected Genre -->
+        <div class="col-6 browse-column general-column">
+            <h2 class="column-headings">Artists in @Model.GenreName</h2>
+            <div class="row">
+                @foreach (var artist in Model.Artists)
+                {
+                    <div class="col-4 genres">
+                        <a class="btn btn-info btn-block" href="@Url.Action("SongsByArtist", "Artists", new { artistId = artist.ArtistId })">
+                            @artist.ArtistName
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Right col-3 for Artist Information -->
+        <div class="col-3 info-column general-column">
+            <h2 class="column-headings">Artist Information</h2>
+            <div class="row info-inner-column">Single Row</div>
+        </div>
+    </div>
+</div>

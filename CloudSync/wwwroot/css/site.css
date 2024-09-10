@@ -20,3 +20,84 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+#form1 {
+    width: 320px;
+}
+
+.general-column {
+    background-color: black; /* Set background to black */
+    color: white; /* Set text color to white for contrast */
+    border-radius: 15px; /* Rounded edges */
+    padding: 20px; /* Add padding inside the columns */
+    margin-bottom: 20px; /* Add space between rows if needed */
+    margin-right: 15px; /* Add space between columns */
+}
+
+.row {
+    display: flex;
+    flex-wrap: nowrap; /* Ensure the columns don’t wrap */
+}
+
+
+h2 {
+    text-align: center; /* Center the titles inside each column */
+    margin-bottom: 15px; /* Add space below the title */
+}
+
+.favourites-column {
+    background-color: lightblue;
+}
+
+.browse-column {
+    background-color: #98FB98; /* Green background */
+    padding: 30px;
+    border-radius: 10px;
+    margin-right: 20px; /* Add space on the right side */
+}
+
+.info-column {
+    background-color: lightcoral;
+}
+
+.favourites-inner-column {
+    background-color: blue;
+    color: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: center; /* Center text */
+}
+
+.genres {
+    padding: 10px;
+    margin: 10px; /* spacing between the genre boxes */
+    border-radius: 10px;
+}
+
+.browse-column .row {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    flex-wrap: wrap; /* Ensure rows wrap if content overflows */
+}
+
+.info-inner-column {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center; /* Center text */
+}
+
+.column-headings {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.genres {
+    text-align: center;
+    background-color: lightgray;
+ 
+    border-radius: 8px;
+    font-weight: bold;
+}
