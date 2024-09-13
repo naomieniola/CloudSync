@@ -37,7 +37,6 @@ body {
     flex-wrap: nowrap; 
 }
 
-
 h2 {
     text-align: center; /* centre titles inside each column */
     margin-bottom: 15px; /* space below title */
@@ -63,12 +62,6 @@ h2 {
     text-align: center; 
 }
 
-.genres {
-    padding: 10px;
-    margin: 10px; /* spacing between the genre boxes */
-    border-radius: 10px;
-}
-
 .browse-column .row {
     display: flex;
     justify-content: center; /* center horizontally */
@@ -87,14 +80,19 @@ h2 {
     margin-bottom: 20px;
 }
 
-.genres {
-    text-align: center; 
+.genre-image img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover; /* covers entire area */
     border-radius: 8px;
-    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9);
+    display: block;
+    margin-bottom: 10px
 }
 
 a img {
     transition: transform 0.3s ease;
+
 }
 
 a:hover img {
@@ -102,7 +100,7 @@ a:hover img {
 }
 
 .artist-image {
-    width: 120px;
+    width: 100%;
     height: 120px;
     object-fit: cover; /* aspect ratio */
     border-radius: 8px;
@@ -125,21 +123,31 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
 }
 
-#form1 {
-    background-color: #161922; /* Set the background color */
-    color: white; /* Set the text color */
-    border: none; /* Optional: Remove the border */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Always visible shadow */
-    transition: box-shadow 0.3s ease; /* Smooth transition for focus effect */
+.navbar-brand img {
+    height: 40px !important;
+    width: 40px !important;
 }
 
-    /* Style for placeholder text */
+.navbar-brand-logo img {
+    height: 50px;
+    width: 50px;
+}
+
+#form1 {
+    background-color: #161922; /* bg colour */
+    color: white;
+    border: none; /* remove the border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease; /* transition for focus effect */
+}
+
+    /* placeholder text */
     #form1::placeholder {
-        color: white; /* Set the placeholder text color to white */
-        opacity: 1; /* Ensure the placeholder is fully opaque */
+        color: white; 
+        opacity: 1; /* placeholder is fully opaque */
     }
 
-    /* When the input is focused */
+    /* when focused */
     #form1:focus {
         outline: none; /* Remove the blue outline when focused */
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Darker/larger shadow on focus */
@@ -237,4 +245,8 @@ body {
 .artist-info-image {
     border-radius: 5px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9)
+}
+
+.nav-link {
+    color: #fff !important;
 }

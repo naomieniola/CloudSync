@@ -2,36 +2,41 @@
 
 <div class="container-fluid">
     <div class="row">
-        <!-- Left col-3 for Favorites -->
+        <!-- favourites -->
         <div class="col-3 favourites-column general-column">
             <h2 class="column-headings">My Favourites</h2>
-            <div class="row favourites-inner-column">Row 1</div>
-            <div class="row favourites-inner-column">Row 2</div>
-            <div class="row favourites-inner-column">Row 3</div>
-            <div class="row favourites-inner-column">Row 4</div>
-            <div class="row favourites-inner-column">Row 5</div>
-            <div class="row favourites-inner-column">Row 6</div>
+            <p class="artist-info-biography mt-3 text-center">
+                Nothing to see here yet.
+            </p>
         </div>
 
-        <!-- Middle col-6 for Genres -->
+        <!-- genres -->
         <div class="col-6 browse-column general-column">
             <h2 class="column-headings">Browse Genres</h2>
             <div class="row">
                 @foreach (var genre in Model)
                 {
-                    <div class="col-4 genres">
+                    @* <div class="col-4 genres">
                         <a class="btn btn-primary btn-block" href="@Url.Action("ArtistsByGenre", "Genres", new { genreId = genre.GenreId })">
                             @genre.GenreName
                         </a>
+                    </div> *@
+                    <div class="col-4 genres genre-image">
+                        <a href="@Url.Action("ArtistsByGenre", "Genres", new { genreId = genre.GenreId })">
+                            <img src="@Url.Content(genre.GenreImage)" alt="@genre.GenreName" class="img-fluid genre-image" />
+                        </a>
+                        <p class="genre-name text-center">@genre.GenreName</p>
                     </div>
                 }
             </div>
         </div>
 
-        <!-- Right col-3 for Artist Information -->
+        <!-- biography -->
         <div class="col-3 info-column general-column">
             <h2 class="column-headings">Biography</h2>
-            <div class="row info-inner-column"></div>
+            <p class="artist-info-biography mt-3 text-center">
+                Nothing to see here yet.
+            </p>
         </div>
     </div>
 </div>

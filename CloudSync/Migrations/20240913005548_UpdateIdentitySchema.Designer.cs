@@ -4,6 +4,7 @@ using CloudSync.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CloudSync.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240913005548_UpdateIdentitySchema")]
+    partial class UpdateIdentitySchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,30 +120,6 @@ namespace CloudSync.Migrations
                     b.ToTable("Artists");
                 });
 
-            modelBuilder.Entity("CloudSync.Models.FavouriteSong", b =>
-                {
-                    b.Property<int>("FavouriteSongId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FavouriteSongId"));
-
-                    b.Property<int>("SongId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("FavouriteSongId");
-
-                    b.HasIndex("SongId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("FavouriteSongs");
-                });
-
             modelBuilder.Entity("CloudSync.Models.Genre", b =>
                 {
                     b.Property<int>("GenreId")
@@ -148,10 +127,6 @@ namespace CloudSync.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GenreId"));
-
-                    b.Property<string>("GenreImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("GenreName")
                         .IsRequired()
@@ -198,6 +173,30 @@ namespace CloudSync.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("Songs");
+                });
+
+            modelBuilder.Entity("FavouriteSong", b =>
+                {
+                    b.Property<int>("FavouriteSongId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FavouriteSongId"));
+
+                    b.Property<int>("SongId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("FavouriteSongId");
+
+                    b.HasIndex("SongId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("FavouriteSongs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -348,25 +347,6 @@ namespace CloudSync.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("CloudSync.Models.FavouriteSong", b =>
-                {
-                    b.HasOne("CloudSync.Models.Song", "Song")
-                        .WithMany()
-                        .HasForeignKey("SongId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CloudSync.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Song");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("CloudSync.Models.Song", b =>
                 {
                     b.HasOne("CloudSync.Models.Artist", "Artist")
@@ -384,6 +364,25 @@ namespace CloudSync.Migrations
                     b.Navigation("Artist");
 
                     b.Navigation("Genre");
+                });
+
+            modelBuilder.Entity("FavouriteSong", b =>
+                {
+                    b.HasOne("CloudSync.Models.Song", "Song")
+                        .WithMany()
+                        .HasForeignKey("SongId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CloudSync.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Song");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

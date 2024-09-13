@@ -13,14 +13,14 @@ public class GenresController : Controller
         _context = context;
     }
 
-    // This action fetches all genres
+    // get all genres
     public IActionResult Index()
     {
         var genres = _context.Genres.ToList();
-        return View(genres); // Pass the list of genres to the Index view
+        return View(genres); // pas genres to index view
     }
 
-    // This action fetches all artists in a specific genre
+    // get all artists from specific genre
     public IActionResult ArtistsByGenre(int genreId)
     {
         var genre = _context.Genres

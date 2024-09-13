@@ -9,7 +9,6 @@ namespace CloudSync.Models
     public TimeSpan SongDuration { get; set; }
     public string SongFile { get; set; }
 
-    // New field
     public string SongImage { get; set; } 
 
     public int ArtistId { get; set; }

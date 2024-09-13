@@ -4,26 +4,21 @@ using CloudSync.Models;
 
 namespace CloudSync.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<User> 
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-
-        // DbSet properties for each model
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Song> Songs { get; set; }
+        public DbSet<FavouriteSong> FavouriteSongs { get; set; }
 
-        public DbSet<User> Users { get; set; }
-
+        //test
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
-            // Add custom configurations if necessary
-            // Example: Configure relationships, indexes, or constraints
         }
     }
 }

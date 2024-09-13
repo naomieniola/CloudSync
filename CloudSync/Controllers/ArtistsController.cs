@@ -13,7 +13,7 @@ public class ArtistsController : Controller
         _context = context;
     }
 
-    // This action fetches all songs by a specific artist
+    // gets all songs by specific artist
     public IActionResult SongsByArtist(int artistId, int genreId)
     {
         var artist = _context.Artists

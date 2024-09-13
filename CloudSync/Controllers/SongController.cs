@@ -14,9 +14,9 @@ public class SongsController : Controller
 
     public IActionResult Index()
     {
-        // Fetch all songs from the database, including the related Artist entity
+        // get all songs from db
         var songs = _context.Songs.Include(s => s.Artist).ToList();
-        return View(songs); // Pass the list of songs to the view
+        return View(songs);
     }
 
 }

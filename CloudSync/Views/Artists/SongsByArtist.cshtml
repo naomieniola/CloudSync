@@ -2,7 +2,19 @@
 
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <!-- Left col-3 for Favorites -->
+        <!-- favourites -->
+        <div class="col-3 favourites-column general-column">
+            <h2 class="column-headings">My Favourites</h2>
+            <p class="artist-info-biography mt-3 text-center">
+                Nothing to see here yet.
+            </p>
+        </div>
+        <@* div class="col-lg-3 col-md-4 col-sm-4 favourites-column general-column">
+            @await Html.PartialAsync("_myfavouritespartial", Model.FavouriteSongs)
+        </div> *@
+
+          @*<div class="row justify-content-center">
+        <!-- Left col-3 for favourites -->
         <div class="col-lg-3 col-md-4 col-sm-4 favourites-column general-column">
             <h2 class="column-headings">My Favourites</h2>
             <div class="row favourites-inner-column">Row 1</div>
@@ -13,60 +25,72 @@
             <div class="row favourites-inner-column">Row 6</div>
         </div>
 
-        <!-- Middle col-6 for Songs by Selected Artist -->
-        <div class="col-lg-6 col-md-4 col-sm-4 browse-column general-column">
+    *@ <!-- songs by selected artist -->
+        <div class="col-6 browse-column general-column">
             <a href="@Url.Action("ArtistsByGenre", "Genres", new { genreId = ViewBag.GenreId })" class="me-3">
                 <img src="~/images/back.png" alt="Back" class="back-button">
             </a>
             <h2 class="column-headings">@Model.ArtistName</h2>
             <ul class="list-group">
+              
                 @{
                     var index = 1;  // index for numbering each song
                 }
-                @foreach (var song in Model.Songs)
+
+                @if (!Model.Songs.Any())
                 {
-                    <li class="list-group-item">
-                        <div class="d-flex align-items-center">
-                            <!-- Song Number -->
-                            <span class="song-number me-3">@index</span> <!-- Displays the number -->
-                            <!-- Song Image -->
+                    <p class="text-center">Nothing to see here yet.</p>
+                }
+                else
+                {
+                    <ul class="list-group">
+                        @foreach (var song in Model.Songs)
+                        {
+                            <li class="list-group-item">
+                                <div class="d-flex align-items-center">
+                            <!-- song number -->
+                            <span class="song-number me-3">@index</span> <!-- displays number -->
+                            <!-- song image -->
                             <img src="@Url.Content(song.SongImage)" alt="Song Image" class="img-fluid rounded-image me-3">
 
-                            <!-- Artist and Song Info -->
+                            <!-- artist and song info -->
                             <div class="song-info">
-                                <p class="artist-name">@Model.ArtistName</p> <!-- Artist Name -->
-                                <p class="song-name">@song.SongName</p> <!-- Song Name -->
+                                <p class="artist-name">@Model.ArtistName</p> <!-- artist Name -->
+                                <p class="song-name">@song.SongName</p> <!-- song Name -->
                             </div>
 
-                            <!-- Audio Control -->
+                            <!-- audio control -->
                             <audio class="audio-shadow" controls>
                                 <source src="@Url.Content(song.SongFile)" type="audio/mpeg">
                                 Your browser does not support the audio element.
                             </audio>
 
-                            <a href="#" class="ms-3">
-                                <img src="~/images/add.png" alt="Like" class="like-button">
-                            </a>
+                            <form asp-action="AddToFavourites" asp-controller="FavouriteSongs" method="post">
+                                <input type="hidden" name="songId" value="@song.SongId" />
+                                <button type="submit" class="btn btn-link">
+                                    <img src="~/images/add.png" alt="Like" class="like-button">
+                                </button>
+                            </form>
+
                         </div>
                     </li>
                     index++; // increment index for next song
                 }
             </ul>
+            }
         </div>
-
-        <!-- Right col-3 for Artist Information -->
-        <div class="col-lg-3 col-md-4 col-sm-4 info-column general-column">
+        <!-- biography -->
+        <div class="col-3 info-column general-column">
             <h2 class="column-headings">Biography</h2>
             <div class="text-center">
-                <!-- Display the Artist's Image -->
-                <img src="@Url.Content(Model.ArtistImage)" alt="Artist Image" class="img-fluid artist-info-image mb-3">
-
-                <!-- Display Biography -->
+                <!-- artist's image -->
+                <img src="@Url.Content(Model.ArtistImage)" alt="artist image" class="img-fluid artist-info-image mb-3">
+                <!-- biography -->
                 <p class="artist-info-biography mt-3">
                     @Model.Biography
                 </p>
             </div>
         </div>
+        </div>
     </div>
-</div>
 
