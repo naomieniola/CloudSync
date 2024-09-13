@@ -1,9 +1,9 @@
 ﻿@model CloudSync.Models.ArtistsSongs
 
 <div class="container-fluid">
-    <div class="row">
+    <div class="row justify-content-center">
         <!-- Left col-3 for Favorites -->
-        <div class="col-3 favourites-column general-column">
+        <div class="col-lg-3 col-md-4 col-sm-4 favourites-column general-column">
             <h2 class="column-headings">My Favourites</h2>
             <div class="row favourites-inner-column">Row 1</div>
             <div class="row favourites-inner-column">Row 2</div>
@@ -14,26 +14,59 @@
         </div>
 
         <!-- Middle col-6 for Songs by Selected Artist -->
-        <div class="col-6 browse-column general-column">
-            <h2 class="column-headings">Songs by @Model.ArtistName</h2>
+        <div class="col-lg-6 col-md-4 col-sm-4 browse-column general-column">
+            <a href="@Url.Action("ArtistsByGenre", "Genres", new { genreId = ViewBag.GenreId })" class="me-3">
+                <img src="~/images/back.png" alt="Back" class="back-button">
+            </a>
+            <h2 class="column-headings">@Model.ArtistName</h2>
             <ul class="list-group">
+                @{
+                    var index = 1;  // index for numbering each song
+                }
                 @foreach (var song in Model.Songs)
                 {
                     <li class="list-group-item">
-                        @song.SongName - @song.SongDuration
-                        <audio controls>
-                            <source src="@Url.Content(song.SongFile)" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
+                        <div class="d-flex align-items-center">
+                            <!-- Song Number -->
+                            <span class="song-number me-3">@index</span> <!-- Displays the number -->
+                            <!-- Song Image -->
+                            <img src="@Url.Content(song.SongImage)" alt="Song Image" class="img-fluid rounded-image me-3">
+
+                            <!-- Artist and Song Info -->
+                            <div class="song-info">
+                                <p class="artist-name">@Model.ArtistName</p> <!-- Artist Name -->
+                                <p class="song-name">@song.SongName</p> <!-- Song Name -->
+                            </div>
+
+                            <!-- Audio Control -->
+                            <audio class="audio-shadow" controls>
+                                <source src="@Url.Content(song.SongFile)" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+
+                            <a href="#" class="ms-3">
+                                <img src="~/images/add.png" alt="Like" class="like-button">
+                            </a>
+                        </div>
                     </li>
+                    index++; // increment index for next song
                 }
             </ul>
         </div>
 
         <!-- Right col-3 for Artist Information -->
-        <div class="col-3 info-column general-column">
-            <h2 class="column-headings">Artist Information</h2>
-            <div class="row info-inner-column">Single Row</div>
+        <div class="col-lg-3 col-md-4 col-sm-4 info-column general-column">
+            <h2 class="column-headings">Biography</h2>
+            <div class="text-center">
+                <!-- Display the Artist's Image -->
+                <img src="@Url.Content(Model.ArtistImage)" alt="Artist Image" class="img-fluid artist-info-image mb-3">
+
+                <!-- Display Biography -->
+                <p class="artist-info-biography mt-3">
+                    @Model.Biography
+                </p>
+            </div>
         </div>
     </div>
 </div>
+

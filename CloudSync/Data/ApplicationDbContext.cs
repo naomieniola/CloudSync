@@ -4,41 +4,26 @@ using CloudSync.Models;
 
 namespace CloudSync.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<User> 
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
 
-        public DbSet<User> Users { get; set; }
+        // DbSet properties for each model
         public DbSet<Artist> Artists { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Song> Songs { get; set; }
-        public DbSet<FavouriteSong> FavouriteSongs { get; set; }
 
+        public DbSet<User> Users { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(builder);
 
-            // composite key for FavouriteSong
-            modelBuilder.Entity<FavouriteSong>()
-                .HasKey(fs => new { fs.UserId, fs.SongId });
-
-            // Songs - Artists relation
-            modelBuilder.Entity<Song>()
-                .HasOne(s => s.Artist)
-                .WithMany(a => a.Songs)
-                .HasForeignKey(s => s.ArtistId)
-                .OnDelete(DeleteBehavior.Restrict); 
-
-            // Songs - Genres relation
-            modelBuilder.Entity<Song>()
-                .HasOne(s => s.Genre)
-                .WithMany(g => g.Songs)
-                .HasForeignKey(s => s.GenreId)
-                .OnDelete(DeleteBehavior.Cascade); 
+            // Add custom configurations if necessary
+            // Example: Configure relationships, indexes, or constraints
         }
     }
 }

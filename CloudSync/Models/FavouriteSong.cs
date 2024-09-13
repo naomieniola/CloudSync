@@ -1,13 +1,16 @@
-﻿namespace CloudSync.Models
+﻿using CloudSync.Models;
+
+public class FavouriteSong
 {
-    public class FavouriteSong
-    {
-        public int UserId { get; set; }
-        public int SongId { get; set; }
+    public int FavouriteSongId { get; set; }
+    public int SongId { get; set; }
 
-        public User User { get; set; }
-        public Song Song { get; set; }
-    }
+    // Foreign key for User
+    public string UserId { get; set; } // Match this type with IdentityUser's key (string)
 
-    //testing
+    // Navigation property
+    public User User { get; set; }
+
+    // Navigation for Song
+    public Song Song { get; set; }
 }

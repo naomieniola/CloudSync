@@ -26,38 +26,33 @@ body {
 }
 
 .general-column {
-    background-color: black; /* Set background to black */
-    color: white; /* Set text color to white for contrast */
-    border-radius: 15px; /* Rounded edges */
-    padding: 20px; /* Add padding inside the columns */
-    margin-bottom: 20px; /* Add space between rows if needed */
-    margin-right: 15px; /* Add space between columns */
+    color: white;
+    border-radius: 15px; /* rounded edges */
+    padding: 20px; /* padding inside the columns */
+    margin-right: 15px; /* space between columns */
 }
 
 .row {
     display: flex;
-    flex-wrap: nowrap; /* Ensure the columns don’t wrap */
+    flex-wrap: nowrap; 
 }
 
 
 h2 {
-    text-align: center; /* Center the titles inside each column */
-    margin-bottom: 15px; /* Add space below the title */
+    text-align: center; /* centre titles inside each column */
+    margin-bottom: 15px; /* space below title */
 }
 
 .favourites-column {
-    background-color: lightblue;
+    background-color: #161922;
 }
 
 .browse-column {
-    background-color: #98FB98; /* Green background */
-    padding: 30px;
-    border-radius: 10px;
-    margin-right: 20px; /* Add space on the right side */
+    background-color: #161922; 
 }
 
 .info-column {
-    background-color: lightcoral;
+    background-color: #161922;
 }
 
 .favourites-inner-column {
@@ -65,7 +60,7 @@ h2 {
     color: white;
     margin-bottom: 10px;
     padding: 10px;
-    text-align: center; /* Center text */
+    text-align: center; 
 }
 
 .genres {
@@ -76,16 +71,14 @@ h2 {
 
 .browse-column .row {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    flex-wrap: wrap; /* Ensure rows wrap if content overflows */
+    justify-content: center; /* center horizontally */
+    flex-wrap: wrap; /* wrap if content overflows */
 }
 
 .info-inner-column {
-    background-color: red;
     color: white;
     padding: 10px;
-    margin-bottom: 10px;
-    text-align: center; /* Center text */
+    text-align: center;
 }
 
 .column-headings {
@@ -95,9 +88,153 @@ h2 {
 }
 
 .genres {
-    text-align: center;
-    background-color: lightgray;
- 
+    text-align: center; 
     border-radius: 8px;
     font-weight: bold;
+}
+
+a img {
+    transition: transform 0.3s ease;
+}
+
+a:hover img {
+    transform: scale(1.05); /* zooms in by 5% for hover effect */
+}
+
+.artist-image {
+    width: 120px;
+    height: 120px;
+    object-fit: cover; /* aspect ratio */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9)
+}
+
+p.artist-genre-name {
+    margin-top: 10px !important;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+
+body {
+    background-color: #202330;
+}
+
+.navbar {
+    background-color: #2D2F42 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+}
+
+#form1 {
+    background-color: #161922; /* Set the background color */
+    color: white; /* Set the text color */
+    border: none; /* Optional: Remove the border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Always visible shadow */
+    transition: box-shadow 0.3s ease; /* Smooth transition for focus effect */
+}
+
+    /* Style for placeholder text */
+    #form1::placeholder {
+        color: white; /* Set the placeholder text color to white */
+        opacity: 1; /* Ensure the placeholder is fully opaque */
+    }
+
+    /* When the input is focused */
+    #form1:focus {
+        outline: none; /* Remove the blue outline when focused */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Darker/larger shadow on focus */
+    }
+
+
+.login-register {
+    border-color: #D46C7F; /* outline color */
+    color: white !important; /* text colour when inactive */
+    margin-right: 10px; /* 10px space to right of each button */
+}
+
+    /* on hover make regist and login buttosn solid with white text */
+    .login-register:hover,
+    .login-register:focus,
+    .login-register:active {
+        background-color: #D46C7F; 
+        border-color: #D46C7F; 
+        color: white !important; 
+    }
+
+    /* active button (when it's the current page or clicked) */
+    .login-register.active {
+        background-color: #D46C7F;
+        border-color: #D46C7F;
+        color: white !important;
+    }
+
+    /* audio styling */
+.list-group-item {
+    background-color: transparent !important; /* removes white background */
+}
+
+/* styling for the artist's image */
+.rounded-image {
+    border-radius: 20px;
+    width: 80px; /* fixed width for uniform size */
+    height: 80px; /* fixed height for uniform size */
+    object-fit: cover !important; /* image will keep its aspect ratio and covers area */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9)
+}
+
+/* styling for song info */
+.song-info {
+    display: flex;
+    flex-direction: column; /* artist name above song name */
+    justify-content: center; /* align the text vertically in the middle */
+    color: white;
+    flex-grow: 1; /* grows to fill space */
+}
+
+/* artist name */
+.artist-name {
+    font-weight: bold; /* bold */
+    color: white;
+    margin-bottom: 2px; /* reduces space between artist and song name */
+}
+
+/* song name */
+.song-name {
+    color: #ACACAC; 
+    margin-top: 0; /* no extra space at the top */
+    margin-bottom: 0; /* Removes extra margin at the bottom */
+}
+
+/* song number */
+.song-number {
+    font-weight: bold; 
+    color: white; 
+    opacity: 0.3;
+}
+
+/* audio control styling: fixed width */
+.audio-shadow {
+    width: 100%;
+    max-width: 350px; 
+    padding: 5px; /* padding to make audio control smaller */
+    margin-left: 20px; /* space between audio control and song info */
+}
+
+.back-button {
+    width: 30px; /* size */
+    height: 30px; /* size */
+    cursor: pointer; /* clickable */
+    margin-right: 10px; /* space between the button and the heading */
+}
+
+.like-button {
+    width: 20px; /* size */
+    height: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9)
+}
+
+
+.artist-info-image {
+    border-radius: 5px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.9)
 }

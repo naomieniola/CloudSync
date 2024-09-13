@@ -13,25 +13,32 @@
             <div class="row favourites-inner-column">Row 6</div>
         </div>
 
-        <!-- Middle col-6 for Artists in Selected Genre -->
-        <div class="col-6 browse-column general-column">
-            <h2 class="column-headings">Artists in @Model.GenreName</h2>
+        <div class="container-fluid">
             <div class="row">
-                @foreach (var artist in Model.Artists)
-                {
-                    <div class="col-4 genres">
-                        <a class="btn btn-info btn-block" href="@Url.Action("SongsByArtist", "Artists", new { artistId = artist.ArtistId })">
-                            @artist.ArtistName
-                        </a>
+                <!-- Middle col-6 for Artists in Selected Genre -->
+                <div class="col-6 browse-column general-column">
+                    <!-- Back Button (Redirect to Index in GenresController) -->
+                    <a href="@Url.Action("Index", "Genres")" class="me-3">
+                        <img src="~/images/back.png" alt="Back" class="back-button">
+                    </a>
+                    <h2 class="column-headings">Artists in @Model.GenreName</h2>
+                    <div class="row">
+                        @foreach (var artist in Model.Artists)
+                        {
+                            <div class="col-4 genres">
+                                <a href="@Url.Action("SongsByArtist", "Artists", new { artistId = artist.ArtistId })">
+                                    <img src="@Url.Content(artist.Image)" alt="@artist.ArtistName" class="img-fluid artist-image" />
+                                </a>
+                                <p class="artist-genre-name">@artist.ArtistName</p>
+                            </div>
+                        }
                     </div>
-                }
+                </div>
+
+                <!-- Right col-3 for Artist Information -->
+                <div class="col-3 info-column general-column">
+                    <h2 class="column-headings">Biography</h2>
+                    <div class="row info-inner-column"></div>
+                </div>
             </div>
         </div>
-
-        <!-- Right col-3 for Artist Information -->
-        <div class="col-3 info-column general-column">
-            <h2 class="column-headings">Artist Information</h2>
-            <div class="row info-inner-column">Single Row</div>
-        </div>
-    </div>
-</div>

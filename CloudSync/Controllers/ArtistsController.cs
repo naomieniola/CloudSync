@@ -14,8 +14,7 @@ public class ArtistsController : Controller
     }
 
     // This action fetches all songs by a specific artist
-
-    public IActionResult SongsByArtist(int artistId)
+    public IActionResult SongsByArtist(int artistId, int genreId)
     {
         var artist = _context.Artists
             .Include(a => a.Songs)
@@ -27,10 +26,14 @@ public class ArtistsController : Controller
         {
             ArtistId = artist.ArtistId,
             ArtistName = artist.ArtistName,
-            Songs = artist.Songs
+            Songs = artist.Songs,
+            ArtistImage = artist.Image,
+            Biography = artist.Biography
         };
 
-        return View(viewModel);
-    }
+        ViewBag.GenreId = genreId;  // go back to previous page
 
+        return View(viewModel);
+
+    }
 }
