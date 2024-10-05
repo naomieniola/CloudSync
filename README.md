@@ -1,4 +1,5 @@
 CloudSync 🎶
+
 CloudSync is a simplified music streaming web application built using ASP.NET Core MVC. The application allows users to browse songs, view artist information, and play audio files directly from the web browser. The project demonstrates the use of the ASP.NET Core framework, leveraging its features for handling user interactions, managing data, and displaying a dynamic front-end.
 
 Project Overview 📜
