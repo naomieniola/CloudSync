@@ -250,3 +250,49 @@ body {
 .nav-link {
     color: #fff !important;
 }
+
+.login-form-container {
+    background-color: #2e2e3e;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.text-white {
+    color: #ffffff !important;
+}
+
+.link {
+    text-decoration: none; /* remove underline */
+    color: white; 
+}
+
+.link:hover {
+    color: lightgray; 
+}
+
+.login-register-btn {
+    background-color: #D46C7F;
+    border-color: #D46C7F;
+}
+
+.login-register-btn:hover {
+    background-color: #B55A68; 
+    border-color: #B55A68;
+}
+
+/* pagination */
+
+.pager .pagination li {
+    margin: 0 5px; /* spacing */
+}
+.pager .pagination li a,
+.pager .pagination li span {
+    color: white !important; /* Change the text color to white */
+}
+
+    .pager .pagination li a:hover,
+    .pager .pagination li span:hover {
+        color: #ffffff !important; /* Ensure hover text color is also white */
+        background-color: #333333; /* Optional: Change background color on hover */
+    }

@@ -1,0 +1,75 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <!-- Include SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Include SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+    <h1 style="display: none;">@ViewData["Title"]</h1> <!-- Hidden to not show the default title -->
+    <!-- SweetAlert script to show the confirmation message -->
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check if the confirmation link is displayed
+            var displayLink = @Model.DisplayConfirmAccountLink.ToString().ToLower();
+
+            if (displayLink) {
+                Swal.fire({
+                    title: 'Account Confirmation Required',
+                    text: 'Click OK to confirm your account via the provided link.',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Make an AJAX request to the server to confirm the account
+                        fetch('@Model.EmailConfirmationUrl')
+                            .then(response => {
+                                if (response.ok) {
+                                    // Display a success message and redirect to the login page
+                                    Swal.fire({
+                                        title: 'Account Confirmed',
+                                        text: 'Your account has been confirmed. Please log in to access your account.',
+                                        icon: 'success',
+                                        confirmButtonText: 'Go to Login'
+                                    }).then(() => {
+                                        window.location.href = '/Identity/Account/Login'; // Redirect to login page
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        title: 'Error',
+                                        text: 'There was an issue confirming your account. Please try again later.',
+                                        icon: 'error',
+                                        confirmButtonText: 'OK'
+                                    });
+                                }
+                            });
+                    }
+                });
+            } else {
+                // Show a different alert if the confirmation link is not displayed
+                Swal.fire({
+                    title: 'Confirmation Email Sent',
+                    text: 'Please check your email to confirm your account.',
+                    icon: 'info',
+                    confirmButtonText: 'OK'
+                }).then(() => {
+                    window.location.href = '/Identity/Account/Login'; // Redirect to login page if no confirmation needed
+                });
+            }
+        });
+    </script>
+</body>
+</html>

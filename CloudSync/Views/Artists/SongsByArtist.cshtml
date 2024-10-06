@@ -1,84 +1,104 @@
 ﻿@model CloudSync.Models.ArtistsSongs
+@using X.PagedList.Mvc.Core; // Include this for PagedList controls
 
 <div class="container-fluid">
     <div class="row justify-content-center">
         <!-- favourites -->
         <div class="col-3 favourites-column general-column">
             <h2 class="column-headings">My Favourites</h2>
-            <p class="artist-info-biography mt-3 text-center">
-                Nothing to see here yet.
-            </p>
+            <ul class="list-group">
+                @if (Model.FavouriteSongs != null && Model.FavouriteSongs.Any())
+                {
+                    @foreach (var favourite in Model.FavouriteSongs)
+                    {
+                        <li class="list-group-item d-flex align-items-center">
+                            <img src="@Url.Content(favourite.Song.SongImage)" alt="Song Image" class="img-fluid rounded-image me-3" style="max-width: 50px;" />
+                            <div class="song-info">
+                                <p class="song-name mb-0">@favourite.Song.SongName</p>
+                                <p class="artist-name text-muted mb-0">@favourite.Song.Artist.ArtistName</p>
+                            </div>
+                            <!-- Delete from Favourites button -->
+                            <form asp-action="RemoveFromFavourites" asp-controller="FavouriteSongs" method="post" class="ms-auto">
+                                <input type="hidden" name="songId" value="@favourite.SongId" />
+                                <button type="submit" class="btn btn-link"
+                                        onclick="return confirm('Are you sure you want to remove this song from your favourites?');">
+                                    <img src="~/images/delete.png" alt="Remove" class="like-button" />
+                                </button>
+                            </form>
+                        </li>
+                    }
+                }
+                else
+                {
+                    <p>No favourite songs added yet!</p>
+                }
+            </ul>
+            <!-- Pagination controls for Favourite Songs -->
+            <div class="d-flex justify-content-center mt-3 pager">
+                @Html.PagedListPager(Model.FavouriteSongs, page => Url.Action("SongsByArtist", new { artistId = Model.ArtistId, genreId = ViewBag.GenreId, pageNumber = ViewBag.CurrentPage, favPageNumber = page }))
+            </div>
         </div>
-        <@* div class="col-lg-3 col-md-4 col-sm-4 favourites-column general-column">
-            @await Html.PartialAsync("_myfavouritespartial", Model.FavouriteSongs)
-        </div> *@
-
-          @*<div class="row justify-content-center">
-        <!-- Left col-3 for favourites -->
-        <div class="col-lg-3 col-md-4 col-sm-4 favourites-column general-column">
-            <h2 class="column-headings">My Favourites</h2>
-            <div class="row favourites-inner-column">Row 1</div>
-            <div class="row favourites-inner-column">Row 2</div>
-            <div class="row favourites-inner-column">Row 3</div>
-            <div class="row favourites-inner-column">Row 4</div>
-            <div class="row favourites-inner-column">Row 5</div>
-            <div class="row favourites-inner-column">Row 6</div>
-        </div>
-
-    *@ <!-- songs by selected artist -->
+        <!-- songs by selected artist -->
         <div class="col-6 browse-column general-column">
-            <a href="@Url.Action("ArtistsByGenre", "Genres", new { genreId = ViewBag.GenreId })" class="me-3">
-                <img src="~/images/back.png" alt="Back" class="back-button">
-            </a>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <!-- back button that redirects to the previous page -->
+                <a href="@ViewBag.PreviousUrl" class="me-3">
+                    <img src="~/images/back.png" alt="Back" class="back-button">
+                </a>
+
+            </div>
             <h2 class="column-headings">@Model.ArtistName</h2>
             <ul class="list-group">
-              
-                @{
-                    var index = 1;  // index for numbering each song
-                }
-
                 @if (!Model.Songs.Any())
                 {
                     <p class="text-center">Nothing to see here yet.</p>
                 }
                 else
                 {
-                    <ul class="list-group">
-                        @foreach (var song in Model.Songs)
-                        {
-                            <li class="list-group-item">
-                                <div class="d-flex align-items-center">
-                            <!-- song number -->
-                            <span class="song-number me-3">@index</span> <!-- displays number -->
-                            <!-- song image -->
-                            <img src="@Url.Content(song.SongImage)" alt="Song Image" class="img-fluid rounded-image me-3">
+                    var index = 1 + (ViewBag.CurrentPage - 1) * Model.Songs.PageSize; // Correctly calculate index
+                    foreach (var song in Model.Songs)
+                    {
+                        <li class="list-group-item">
+                            <div class="d-flex align-items-center">
+                                <!-- song number -->
+                                <span class="song-number me-3">@index</span> <!-- displays number -->
+                                <!-- song image -->
+                                <img src="@Url.Content(song.SongImage)" alt="Song Image" class="img-fluid rounded-image me-3">
+                                <!-- artist and song info -->
+                                <div class="song-info">
+                                    <p class="artist-name">@Model.ArtistName</p> <!-- artist Name -->
+                                    <p class="song-name">@song.SongName</p> <!-- song Name -->
+                                </div>
 
-                            <!-- artist and song info -->
-                            <div class="song-info">
-                                <p class="artist-name">@Model.ArtistName</p> <!-- artist Name -->
-                                <p class="song-name">@song.SongName</p> <!-- song Name -->
+                                <!-- audio control -->
+                                <audio class="audio-shadow ms-3" controls>
+                                    <source src="@Url.Content(song.SongFile)" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+
+                                <!-- Add to Favourites form -->
+                                <form asp-action="AddToFavourites" asp-controller="FavouriteSongs" method="post" class="ms-auto">
+                                    <!-- Include the song ID as a hidden input -->
+                                    <input type="hidden" name="songId" value="@song.SongId" />
+                                    <!-- Include the artist ID as a hidden input -->
+                                    <input type="hidden" name="artistId" value="@song.ArtistId" />
+                                    <button type="submit" class="btn btn-link">
+                                        <img src="~/images/add.png" alt="Like" class="like-button" />
+                                    </button>
+                                </form>
                             </div>
-
-                            <!-- audio control -->
-                            <audio class="audio-shadow" controls>
-                                <source src="@Url.Content(song.SongFile)" type="audio/mpeg">
-                                Your browser does not support the audio element.
-                            </audio>
-
-                            <form asp-action="AddToFavourites" asp-controller="FavouriteSongs" method="post">
-                                <input type="hidden" name="songId" value="@song.SongId" />
-                                <button type="submit" class="btn btn-link">
-                                    <img src="~/images/add.png" alt="Like" class="like-button">
-                                </button>
-                            </form>
-
-                        </div>
-                    </li>
-                    index++; // increment index for next song
+                        </li>
+                        index++; // increment index for next song
+                    }
                 }
             </ul>
-            }
+
+            <!-- Pagination controls -->
+            <div class="d-flex justify-content-center mt-3 pager">
+                @Html.PagedListPager(Model.Songs, page => Url.Action("SongsByArtist", new { artistId = Model.ArtistId, genreId = ViewBag.GenreId, pageNumber = page }))
+            </div>
         </div>
+
         <!-- biography -->
         <div class="col-3 info-column general-column">
             <h2 class="column-headings">Biography</h2>
@@ -91,6 +111,5 @@
                 </p>
             </div>
         </div>
-        </div>
     </div>
-
+</div>

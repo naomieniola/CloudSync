@@ -1,4 +1,5 @@
 ﻿using Humanizer;
+using X.PagedList;
 
 namespace CloudSync.Models
 {
@@ -6,11 +7,9 @@ namespace CloudSync.Models
     {
         public int ArtistId { get; set; }
         public string ArtistName { get; set; }
-        public IEnumerable<Song> Songs { get; set; }
+        public IPagedList<Song> Songs { get; set; } // Use IPagedList here
         public string ArtistImage { get; set; }
         public string Biography { get; set; }
-
-        public List<FavouriteSong> FavouriteSongs { get; set; } //pass favourite songs to the view
-
+        public IPagedList<FavouriteSong> FavouriteSongs { get; set; } // Paginated Favourite Songs
     }
 }
