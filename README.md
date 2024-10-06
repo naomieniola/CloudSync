@@ -60,7 +60,7 @@ Before you begin, ensure you have the following tools installed:
    ```bash
    dotnet run
 
-4. **Demo**:
+**Demo**:
 
    ![CloudSync Demo](CloudSync-Demo.gif)
 
