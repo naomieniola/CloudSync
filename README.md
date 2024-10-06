@@ -60,6 +60,7 @@ Before you begin, ensure you have the following tools installed:
    ```bash
    dotnet run
 
+4. **Demo**:
 
-   ![CloudSync Demo](CloudSyncDemo-ezgif.com-resize-video.mp4)
+   ![CloudSync Demo](CloudSync-Demo.gif)
 
