@@ -59,3 +59,7 @@ Before you begin, ensure you have the following tools installed:
 
    ```bash
    dotnet run
+
+
+   ![CloudSync Demo](CloudSyncDemo-ezgif.com-resize-video.mp4)
+
