@@ -62,5 +62,5 @@ Before you begin, ensure you have the following tools installed:
 
 **Demo**:
 
-   ![CloudSync Demo](CloudSync-Demo.gif)
+   ![CloudSync Demo](CloudSync-Demo-1.gif)
 
